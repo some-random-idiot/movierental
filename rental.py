@@ -1,8 +1,3 @@
-import logging
-
-from ISPCodes.movierental.movie import Movie
-
-
 class Rental:
     """
     A rental of a movie by customer.
@@ -30,29 +25,9 @@ class Rental:
 
     def get_charge(self, rental):
         # compute rental change
-        amount = 0
-        if rental.get_movie().get_price_code() == Movie.REGULAR:
-            # Two days for $2, additional days 1.50 each.
-            amount = 2.0
-            if rental.get_days_rented() > 2:
-                amount += 1.5 * (rental.get_days_rented() - 2)
-        elif rental.get_movie().get_price_code() == Movie.CHILDRENS:
-            # Three days for $1.50, additional days 1.50 each.
-            amount = 1.5
-            if rental.get_days_rented() > 3:
-                amount += 1.5 * (rental.get_days_rented() - 3)
-        elif rental.get_movie().get_price_code() == Movie.NEW_RELEASE:
-            # Straight per day charge
-            amount = 3 * rental.get_days_rented()
-        else:
-            log = logging.getLogger()
-            log.error(f"Movie {rental.get_movie()} has unrecognized priceCode {rental.get_movie().get_price_code()}")
-        return amount
+        return self.get_movie().get_price_code().price(rental.days_rented)
 
     def get_freq_rental_point(self, frequent_renter_points, rental):
         # award renter points
-        if rental.get_movie().get_price_code() == Movie.NEW_RELEASE:
-            frequent_renter_points += rental.get_days_rented()
-        else:
-            frequent_renter_points += 1
+        frequent_renter_points += self.get_movie().get_price_code().frequent_renter_point(rental.days_rented)
         return frequent_renter_points
