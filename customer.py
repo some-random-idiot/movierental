@@ -38,7 +38,7 @@ class Customer:
         fmt = "{:32s}   {:4d} {:6.2f}\n"
 
         for rental in self.rentals:
-            amount = self.compute_rental(rental)
+            amount = self.get_charge(rental)
             # award renter points
             if rental.get_movie().get_price_code() == Movie.NEW_RELEASE:
                 frequent_renter_points += rental.get_days_rented()
@@ -57,7 +57,7 @@ class Customer:
 
         return statement
 
-    def compute_rental(self, rental):
+    def get_charge(self, rental):
         # compute rental change
         amount = 0
         if rental.get_movie().get_price_code() == Movie.REGULAR:
