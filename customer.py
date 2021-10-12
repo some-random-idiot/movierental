@@ -37,11 +37,11 @@ class Customer:
         fmt = "{:32s}   {:4d} {:6.2f}\n"
 
         for rental in self.rentals:
-            frequent_renter_points = rental.get_freq_rental_point(frequent_renter_points, rental)
+            frequent_renter_points = rental.get_freq_rental_point(frequent_renter_points)
             #  add detail line to statement
-            statement += fmt.format(rental.get_movie().get_title(), rental.get_days_rented(), rental.get_charge(rental))
+            statement += fmt.format(rental.get_movie().get_title(), rental.get_days_rented(), rental.get_charge())
             # and accumulate activity
-            total_amount += rental.get_charge(rental)
+            total_amount += rental.get_charge()
 
         # footer: summary of charges
         statement += "\n"

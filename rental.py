@@ -23,11 +23,11 @@ class Rental:
     def get_days_rented(self):
         return self.days_rented
 
-    def get_charge(self, rental):
+    def get_charge(self):
         # compute rental change
-        return self.get_movie().get_price_code().price(rental.days_rented)
+        return self.get_movie().get_price_code().price(self.days_rented)
 
-    def get_freq_rental_point(self, frequent_renter_points, rental):
+    def get_freq_rental_point(self, frequent_renter_points):
         # award renter points
-        frequent_renter_points += self.get_movie().get_price_code().frequent_renter_point(rental.days_rented)
+        frequent_renter_points += self.get_movie().get_price_code().frequent_renter_point(self.days_rented)
         return frequent_renter_points
