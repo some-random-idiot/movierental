@@ -30,11 +30,11 @@ class RentalTest(unittest.TestCase):
     def test_rental_price(self):
         for movie_type, days, charge, price_code in self.test_rental_price_cases:
             with self.subTest():
-                rental = Rental(movie_type, days, price_code)
+                rental = Rental(movie_type, days)
                 self.assertEqual(rental.get_charge(), charge)
 
     def test_rental_points(self):
         for movie_type, days, points, price_code in self.test_rental_points_cases:
             with self.subTest():
-                rental = Rental(movie_type, days, price_code)
+                rental = Rental(movie_type, days)
                 self.assertEqual(rental.get_freq_rental_point(), points)

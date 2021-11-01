@@ -1,4 +1,5 @@
 from enum import Enum
+from datetime import datetime
 
 
 class PriceCode(Enum):
@@ -22,6 +23,15 @@ class PriceCode(Enum):
         frp = self.value["frp"]
         return frp(days)
 
+    @classmethod
+    def for_movie(cls, movie):
+        if movie.get_year() == str(datetime.now().year):
+            return cls.new_release
+        elif "Children" in movie.get_genre_list():
+            return cls.childrens
+        else:
+            return cls.regular
+
 
 class Rental:
     """
@@ -35,13 +45,13 @@ class Rental:
     field is used.
     """
 
-    def __init__(self, movie, days_rented, price_code):
+    def __init__(self, movie, days_rented):
         """Initialize a new movie rental object for
            a movie with known rental period (daysRented).
         """
         self.movie = movie
         self.days_rented = days_rented
-        self.price_code = price_code
+        self.price_code = PriceCode.for_movie(movie)
 
     def get_title(self):
         return self.movie.title
