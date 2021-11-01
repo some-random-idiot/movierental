@@ -1,5 +1,6 @@
 from rental import Rental
 from movie import Movie
+from datetime import datetime
 
 
 class Customer:
@@ -69,6 +70,6 @@ if __name__ == "__main__":
     print(customer.statement())
     movie = Movie("Hacker Noon", "2001", ["Horror", "Sci-Fi"])
     customer.add_rental(Rental(movie, 2))
-    movie = Movie("CitizenFour", "2014", ["Documentary"])
+    movie = Movie("An Unnamed Current Year Film", str(datetime.now().year), ["Action", "Adventure"])
     customer.add_rental(Rental(movie, 3))
     print(customer.statement())
