@@ -22,6 +22,18 @@ class Customer:
     def get_name(self):
         return self.name
 
+    def compute_rental_points(self):
+        frequent_renter_points = 0
+        for rental in self.rentals:
+            frequent_renter_points += rental.get_freq_rental_point()
+        return frequent_renter_points
+
+    def compute_total_charge(self):
+        total_amount = 0
+        for rental in self.rentals:
+            total_amount += rental.get_charge()
+        return total_amount
+
     def statement(self):
         """
             Print all the rentals in current period, 
@@ -29,19 +41,15 @@ class Customer:
             Returns:
                 the statement as a String
         """
-        total_amount = 0  # total charges
-        frequent_renter_points = 0
+        total_amount = self.compute_total_charge()  # total charges
+        frequent_renter_points = self.compute_rental_points()
         statement = f"Rental Report for {self.name}\n\n"
         fmt = "{:32s}    {:4s} {:6s}\n"
         statement += fmt.format("Movie Title", "Days", "Price")
         fmt = "{:32s}   {:4d} {:6.2f}\n"
 
         for rental in self.rentals:
-            frequent_renter_points = rental.get_freq_rental_point(frequent_renter_points)
-            #  add detail line to statement
             statement += fmt.format(rental.movie.get_title(), rental.days_rented, rental.get_charge())
-            # and accumulate activity
-            total_amount += rental.get_charge()
 
         # footer: summary of charges
         statement += "\n"

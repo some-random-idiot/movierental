@@ -24,7 +24,7 @@ class Rental:
         # compute rental change
         return self.movie.get_price_code().price(self.days_rented)
 
-    def get_freq_rental_point(self, frequent_renter_points):
+    def get_freq_rental_point(self):
         # award renter points
-        frequent_renter_points += self.movie.get_price_code().frequent_renter_point(self.days_rented)
+        frequent_renter_points = self.movie.get_price_code().frequent_renter_point(self.days_rented)
         return frequent_renter_points

@@ -38,4 +38,4 @@ class RentalTest(unittest.TestCase):
         for movie_type, days, points in self.test_rental_points_cases:
             with self.subTest():
                 rental = Rental(movie_type, days)
-                self.assertEqual(rental.get_freq_rental_point(0), points)
+                self.assertEqual(rental.get_freq_rental_point(), points)
