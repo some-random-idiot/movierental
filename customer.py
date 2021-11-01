@@ -65,6 +65,6 @@ if __name__ == "__main__":
     print(customer.statement())
     movie = Movie("Hacker Noon", "2001", ["Horror", "Sci-Fi"])
     customer.add_rental(Rental(movie, 2))
-    movie = Movie("CitizenFour", "2004", ["Documentary"])
+    movie = Movie("CitizenFour", "2014", ["Documentary"])
     customer.add_rental(Rental(movie, 3))
     print(customer.statement())
