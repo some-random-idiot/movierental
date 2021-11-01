@@ -39,8 +39,8 @@ class MovieCatalog:
         self.last_index = 0
 
     def add_movie(self):
-        """Add a movie from a csv file to the catalog."""
-        with open('movies.csv', 'r') as f:
+        """Add a movie from a csv file called 'movies.csv' to the catalog."""
+        with open("movies.csv", 'r') as f:
             rows = list(csv.reader(f))
             self.catalog[rows[self.last_index][1]] = Movie(rows[self.last_index][1], rows[self.last_index][2],
                                                            rows[self.last_index][3].split(sep='|'))
