@@ -4,11 +4,10 @@ from datetime import datetime
 
 
 class Customer:
-    """
-       A customer who rents movies.
-       The customer object holds information about the
-       movies rented for the current billing period,
-       and can print a statement of his rentals.
+    """A customer who rents movies.
+    The customer object holds information about the
+    movies rented for the current billing period,
+    and can print a statement of his rentals.
     """
 
     def __init__(self, name: str):
@@ -40,13 +39,13 @@ class Customer:
         return total_amount
 
     def statement(self) -> str:
+        """Print all the rentals in current period,
+        along with total charges and reward points.
+
+        Returns:
+            The statement as a String
         """
-            Print all the rentals in current period, 
-            along with total charges and reward points.
-            Returns:
-                the statement as a String
-        """
-        total_amount = self.compute_total_charge()  # total charges
+        total_amount = self.compute_total_charge()
         frequent_renter_points = self.compute_rental_points()
         statement = f"Rental Report for {self.name}\n\n"
         fmt = "{:32s}    {:4s} {:6s}\n"
@@ -56,7 +55,7 @@ class Customer:
         for rental in self.rentals:
             statement += fmt.format(rental.movie.get_title(), rental.days_rented, rental.get_charge())
 
-        # footer: summary of charges
+        # Footer: summary of charges
         statement += "\n"
         statement += "{:32s} {:6s} {:6.2f}\n".format(
             "Total Charges", "", total_amount)

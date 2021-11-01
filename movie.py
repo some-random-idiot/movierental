@@ -2,9 +2,7 @@ import csv
 
 
 class Movie:
-    """
-    A movie available for rent.
-    """
+    """A movie available for rent."""
 
     def __init__(self, title: str, year: str, genre: list):
         """Initialize a new movie."""

@@ -6,6 +6,7 @@ from datetime import datetime
 
 class RentalTest(unittest.TestCase):
     def setUp(self):
+        """Create movie objects and test case parameters."""
         self.new_movie = Movie("An Unnamed Current Year Film", str(datetime.now().year), ["Action", "Adventure"])
         self.regular_movie = Movie("CitizenFour", "2014", ["Documentary"])
         self.childrens_movie = Movie("Frozen", "2013", ["Adventure", "Fantasy", "Children"])
@@ -29,12 +30,14 @@ class RentalTest(unittest.TestCase):
         self.assertEqual("Shrek", m.get_title())
 
     def test_rental_price(self):
+        """Test the rental price calculation."""
         for movie_type, days, charge in self.test_rental_price_cases:
             with self.subTest():
                 rental = Rental(movie_type, days)
                 self.assertEqual(rental.get_charge(), charge)
 
     def test_rental_points(self):
+        """Test the frequent renter point calculation."""
         for movie_type, days, points in self.test_rental_points_cases:
             with self.subTest():
                 rental = Rental(movie_type, days)

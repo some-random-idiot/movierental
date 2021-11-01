@@ -26,6 +26,7 @@ class CustomerTest(unittest.TestCase):
         pass
 
     def test_statement(self):
+        """Test the statement results."""
         stmt = self.c.statement()
         # Visual testing
         print(stmt)

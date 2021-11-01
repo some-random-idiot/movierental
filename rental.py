@@ -38,8 +38,7 @@ class PriceCode(Enum):
 
 
 class Rental:
-    """
-    A rental of a movie by customer.
+    """A rental of a movie by customer.
     From Fowler's refactoring example.
 
     A realistic Rental would have fields for the dates
