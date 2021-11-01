@@ -63,8 +63,8 @@ class Customer:
 if __name__ == "__main__":
     customer = Customer("Edward Snowden")
     print(customer.statement())
-    movie = Movie("Hacker Noon")
+    movie = Movie("Hacker Noon", "2001", ["Horror", "Sci-Fi"])
     customer.add_rental(Rental(movie, 2, PriceCode.regular))
-    movie = Movie("CitizenFour")
+    movie = Movie("CitizenFour", "2004", ["Documentary"])
     customer.add_rental(Rental(movie, 3, PriceCode.new_release))
     print(customer.statement())

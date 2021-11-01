@@ -5,9 +5,9 @@ from movie import Movie
 
 class RentalTest(unittest.TestCase):
     def setUp(self):
-        self.new_movie = Movie("Mulan")
-        self.regular_movie = Movie("CitizenFour")
-        self.childrens_movie = Movie("Frozen")
+        self.new_movie = Movie("Mulan", "2010", ["Action", "Adventure"])
+        self.regular_movie = Movie("CitizenFour", "2004", ["Documentary"])
+        self.childrens_movie = Movie("Frozen", "2012", ["Adventure", "Fantasy"])
 
         self.test_rental_price_cases = [(self.new_movie, 1, 3.0, PriceCode.new_release),
                                         (self.new_movie, 5, 15.0, PriceCode.new_release),
@@ -24,7 +24,7 @@ class RentalTest(unittest.TestCase):
 
     def test_movie_attributes(self):
         """trivial test to catch refactoring errors or change in API of Movie"""
-        m = Movie("CitizenFour")
+        m = Movie("CitizenFour", "2004", ["Documentary"])
         self.assertEqual("CitizenFour", m.get_title())
 
     def test_rental_price(self):
