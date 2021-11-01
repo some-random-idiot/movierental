@@ -1,9 +1,11 @@
+from movie import Movie
 from enum import Enum
 from datetime import datetime
 
 
 class PriceCode(Enum):
-    """An enumeration for different kinds of movies and their behavior"""
+    """An enumeration for different kinds of movies' price codes."""
+
     new_release = {"price": lambda days: 3.0 * days,
                    "frp": lambda days: days
                    }
@@ -14,17 +16,19 @@ class PriceCode(Enum):
                  "frp": lambda days: 1
                  }
 
-    def price(self, days):
-        "Return the rental price for a given number of days"""
+    def price(self, days: int) -> float:
+        """Return the rental price according to the given number of day(s)"""
         pricing = self.value["price"]  # the enum member's price formula
         return pricing(days)
 
-    def frequent_renter_point(self, days):
+    def frequent_renter_point(self, days: int) -> int:
+        """Return the frequent renter point according to the given number of day(s)"""
         frp = self.value["frp"]
         return frp(days)
 
     @classmethod
-    def for_movie(cls, movie):
+    def for_movie(cls, movie: Movie) -> Enum:
+        """Determine the price code of a movie."""
         if movie.get_year() == str(datetime.now().year):
             return cls.new_release
         elif "Children" in movie.get_genre_list():
@@ -45,7 +49,7 @@ class Rental:
     field is used.
     """
 
-    def __init__(self, movie, days_rented):
+    def __init__(self, movie: Movie, days_rented: int):
         """Initialize a new movie rental object for
            a movie with known rental period (daysRented).
         """
@@ -53,14 +57,15 @@ class Rental:
         self.days_rented = days_rented
         self.price_code = PriceCode.for_movie(movie)
 
-    def get_title(self):
-        return self.movie.title
+    def get_title(self) -> str:
+        """Get the title of the rented movie."""
+        return self.movie.get_title()
 
-    def get_charge(self):
-        # compute rental change
+    def get_charge(self) -> float:
+        """Get the rental charge according to the price code."""
         return self.price_code.price(self.days_rented)
 
-    def get_freq_rental_point(self):
-        # award renter points
+    def get_freq_rental_point(self) -> int:
+        """Get the frequent renter point(s) accumulated from this rental."""
         frequent_renter_points = self.price_code.frequent_renter_point(self.days_rented)
         return frequent_renter_points

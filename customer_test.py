@@ -1,7 +1,7 @@
 import re
 import unittest
 from customer import Customer
-from rental import Rental, PriceCode
+from rental import Rental
 from movie import Movie
 from datetime import datetime
 
@@ -22,19 +22,19 @@ class CustomerTest(unittest.TestCase):
 
     @unittest.skip("No convenient way to test")
     def test_billing():
-        # no convenient way to test billing since its buried in the statement() method.
+        # No convenient way to test billing since its buried in the statement() method.
         pass
 
     def test_statement(self):
         stmt = self.c.statement()
-        # visual testing
+        # Visual testing
         print(stmt)
-        # get total charges from statement using a regex
+        # Get total charges from statement using a regex
         pattern = r".*Total [Cc]harges\s+(\d+\.\d\d).*"
         matches = re.match(pattern, stmt, flags=re.DOTALL)
         self.assertIsNotNone(matches)
         self.assertEqual("0.00", matches[1])
-        # add a rental
+        # Add a rental
         self.c.add_rental(Rental(self.new_movie, 4))  # days
         stmt = self.c.statement()
         matches = re.match(pattern, stmt.replace('\n', ''), flags=re.DOTALL)

@@ -1,4 +1,4 @@
-from rental import Rental, PriceCode
+from rental import Rental
 from movie import Movie
 
 
@@ -11,30 +11,34 @@ class Customer:
     """
 
     def __init__(self, name: str):
-        """ Initialize a new customer."""
+        """Initialize a new customer."""
         self.name = name
         self.rentals = []
 
     def add_rental(self, rental: Rental):
+        """Add a rental record to the customer's list of rental records."""
         if rental not in self.rentals:
             self.rentals.append(rental)
 
-    def get_name(self):
+    def get_name(self) -> str:
+        """Get the name of the customer"""
         return self.name
 
-    def compute_rental_points(self):
+    def compute_rental_points(self) -> int:
+        """Compute the total rental point(s) gained from rentals belonging to this customer."""
         frequent_renter_points = 0
         for rental in self.rentals:
             frequent_renter_points += rental.get_freq_rental_point()
         return frequent_renter_points
 
-    def compute_total_charge(self):
+    def compute_total_charge(self) -> float:
+        """Computes the total charge accumulated through rentals."""
         total_amount = 0
         for rental in self.rentals:
             total_amount += rental.get_charge()
         return total_amount
 
-    def statement(self):
+    def statement(self) -> str:
         """
             Print all the rentals in current period, 
             along with total charges and reward points.
